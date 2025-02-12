@@ -125,7 +125,7 @@ export default function FeaturesTab() {
     enableLatestBranch(true);
     enableContextOptimization(true);
     setAutoSelectTemplate(true);
-    setPromptId('optimized');
+    setPromptId('default');
 
     // Only enable event logs if not explicitly set before
     if (eventLogs === undefined) {
