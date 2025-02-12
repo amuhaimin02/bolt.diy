@@ -121,10 +121,9 @@ export default function FeaturesTab() {
 
   // Enable features by default on first load
   React.useEffect(() => {
-    // Force enable these features by default
-    enableLatestBranch(true);
+    enableLatestBranch(false);
     enableContextOptimization(true);
-    setAutoSelectTemplate(true);
+    setAutoSelectTemplate(false);
     setPromptId('default');
 
     // Only enable event logs if not explicitly set before
