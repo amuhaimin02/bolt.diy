@@ -153,9 +153,9 @@ const actionVariants = {
 };
 
 function openArtifactInWorkbench(filePath: any) {
-  if (workbenchStore.currentView.get() !== 'code') {
-    workbenchStore.currentView.set('code');
-  }
+  // if (workbenchStore.currentView.get() !== 'code') {
+  //   workbenchStore.currentView.set('code');
+  // }
 
   workbenchStore.setSelectedFile(`${WORK_DIR}/${filePath}`);
 }
@@ -199,7 +199,7 @@ const ActionList = memo(({ actions }: ActionListProps) => {
                 </div>
                 {type === 'file' ? (
                   <div>
-                    Create{' '}
+                    Editing{' '}
                     <code
                       className="bg-bolt-elements-artifacts-inlineCode-background text-bolt-elements-artifacts-inlineCode-text px-1.5 py-1 rounded-md text-bolt-elements-item-contentAccent hover:underline cursor-pointer"
                       onClick={() => openArtifactInWorkbench(action.filePath)}

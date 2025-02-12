@@ -57,7 +57,6 @@ const workbenchVariants = {
 export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => {
   renderLogger.trace('Workbench');
 
-  const [isSyncing, setIsSyncing] = useState(false);
   const [isPushDialogOpen, setIsPushDialogOpen] = useState(false);
 
   const hasPreview = useStore(computed(workbenchStore.previews, (previews) => previews.length > 0));
@@ -106,21 +105,6 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
     workbenchStore.resetCurrentDocument();
   }, []);
 
-  const handleSyncFiles = useCallback(async () => {
-    setIsSyncing(true);
-
-    try {
-      const directoryHandle = await window.showDirectoryPicker();
-      await workbenchStore.syncFiles(directoryHandle);
-      toast.success('Files synced successfully');
-    } catch (error) {
-      console.error('Error syncing files:', error);
-      toast.error('Failed to sync files');
-    } finally {
-      setIsSyncing(false);
-    }
-  }, []);
-
   return (
     chatStarted && (
       <motion.div
@@ -143,38 +127,9 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
           <div className="absolute inset-0 px-2 lg:px-6">
             <div className="h-full flex flex-col bg-bolt-elements-background-depth-2 border border-bolt-elements-borderColor shadow-sm rounded-lg overflow-hidden">
               <div className="flex items-center px-3 py-2 border-b border-bolt-elements-borderColor">
-                <Slider selected={selectedView} options={sliderOptions} setSelected={setSelectedView} />
+                {/*<Slider selected={selectedView} options={sliderOptions} setSelected={setSelectedView} />*/}
                 <div className="ml-auto" />
-                {selectedView === 'code' && (
-                  <div className="flex overflow-y-auto">
-                    <PanelHeaderButton
-                      className="mr-1 text-sm"
-                      onClick={() => {
-                        workbenchStore.downloadZip();
-                      }}
-                    >
-                      <div className="i-ph:code" />
-                      Download Code
-                    </PanelHeaderButton>
-                    <PanelHeaderButton className="mr-1 text-sm" onClick={handleSyncFiles} disabled={isSyncing}>
-                      {isSyncing ? <div className="i-ph:spinner" /> : <div className="i-ph:cloud-arrow-down" />}
-                      {isSyncing ? 'Syncing...' : 'Sync Files'}
-                    </PanelHeaderButton>
-                    <PanelHeaderButton
-                      className="mr-1 text-sm"
-                      onClick={() => {
-                        workbenchStore.toggleTerminal(!workbenchStore.showTerminal.get());
-                      }}
-                    >
-                      <div className="i-ph:terminal" />
-                      Toggle Terminal
-                    </PanelHeaderButton>
-                    <PanelHeaderButton className="mr-1 text-sm" onClick={() => setIsPushDialogOpen(true)}>
-                      <div className="i-ph:git-branch" />
-                      Push to GitHub
-                    </PanelHeaderButton>
-                  </div>
-                )}
+                {/* Button goes here */}
                 <IconButton
                   icon="i-ph:x-circle"
                   className="-mr-1"

@@ -117,20 +117,6 @@ export const Messages = React.forwardRef<HTMLDivElement, MessagesProps>((props: 
     window.location.search = searchParams.toString();
   };
 
-  const handleFork = async (messageId: string) => {
-    try {
-      if (!db || !chatId.get()) {
-        toast.error('Chat persistence is not available');
-        return;
-      }
-
-      const urlId = await forkChat(db, chatId.get()!, messageId);
-      window.location.href = `/chat/${urlId}`;
-    } catch (error) {
-      toast.error('Failed to fork chat: ' + (error as Error).message);
-    }
-  };
-
   return (
     <div
       id={id}
@@ -204,17 +190,6 @@ export const Messages = React.forwardRef<HTMLDivElement, MessagesProps>((props: 
                         />
                       </WithTooltip>
                     )}
-
-                    <WithTooltip tooltip="Fork chat from this message">
-                      <button
-                        onClick={() => handleFork(messageId)}
-                        key="i-ph:git-fork"
-                        className={classNames(
-                          'i-ph:git-fork',
-                          'text-xl text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary transition-colors',
-                        )}
-                      />
-                    </WithTooltip>
                   </div>
                 )}
               </div>
