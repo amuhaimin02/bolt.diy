@@ -48,7 +48,7 @@ export default function ProgressCompilation({ data }: { data?: ProgressAnnotatio
           className={classNames(
             'bg-bolt-elements-item-backgroundAccent',
             'p-1 rounded-lg text-bolt-elements-item-contentAccent',
-            'flex ',
+            'flex items-center',
           )}
         >
           <div className="flex-1">
@@ -89,7 +89,7 @@ export default function ProgressCompilation({ data }: { data?: ProgressAnnotatio
 const ProgressItem = ({ progress }: { progress: ProgressAnnotation }) => {
   return (
     <motion.div
-      className={classNames('flex text-sm gap-3')}
+      className={classNames('flex items-center pl-2 text-sm gap-3')}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
