@@ -2,6 +2,20 @@ import type { Message } from 'ai';
 import { generateId } from './fileUtils';
 import { detectProjectCommands, createCommandsMessage, escapeBoltTags } from './projectCommands';
 
+const indexRedirectionCode = (homePage: string) => `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=${homePage}">
+    <title></title>
+</head>
+<body>
+</body>
+</html>
+`;
+
 export const createChatFromFolder = async (
   files: File[],
   binaryFiles: string[],
@@ -46,6 +60,9 @@ ${escapeBoltTags(file.content)}
 </boltAction>`,
   )
   .join('\n\n')}
+  <boltAction type="file" filePath="index.html">
+    ${indexRedirectionCode('main.html')}
+  </boltAction>
 </boltArtifact>`,
     id: generateId(),
     createdAt: new Date(),

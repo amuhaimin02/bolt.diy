@@ -17,7 +17,8 @@ export async function detectProjectCommands(_files: FileContent[]): Promise<Proj
   // Simply return static templates
   return {
     type: 'Static',
-    startCommand: 'npm install vite && npx vite',
+    setupCommand: 'npm install vite',
+    startCommand: 'npx vite',
     followupMessage: '',
   };
 }
