@@ -60,9 +60,6 @@ ${escapeBoltTags(file.content)}
 </boltAction>`,
   )
   .join('\n\n')}
-  <boltAction type="file" filePath="index.html">
-    ${indexRedirectionCode('main.html')}
-  </boltAction>
 </boltArtifact>`,
     id: generateId(),
     createdAt: new Date(),
