@@ -15,6 +15,7 @@ import {
   createChatFromMessages,
   type IChatMetadata,
 } from './db';
+import { importAutopilotProject } from '~/lib/persistence/autopilot';
 
 export interface ChatHistoryItem {
   id: string;
@@ -55,7 +56,7 @@ export function useChatHistory() {
     }
 
     if (mixedId) {
-      getMessages(db, mixedId)
+      importAutopilotProject(mixedId)
         .then((storedMessages) => {
           if (storedMessages && storedMessages.messages.length > 0) {
             const rewindId = searchParams.get('rewindTo');

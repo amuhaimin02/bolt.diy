@@ -31,7 +31,7 @@ export const createChatFromFolder = async (
           const relativePath = file.webkitRelativePath.split('/').slice(1).join('/');
           resolve({
             content,
-            path: relativePath,
+            path: relativePath || file.name,
           });
         };
         reader.onerror = reject;
@@ -50,7 +50,7 @@ export const createChatFromFolder = async (
 
   const filesMessage: Message = {
     role: 'assistant',
-    content: `I've imported the contents of the "${folderName}" folder.${binaryFilesMessage}
+    content: `I've imported the contents of the "${folderName}" project.${binaryFilesMessage}
 
 <boltArtifact id="imported-files" title="Imported Files" type="bundled" >
 ${fileArtifacts
@@ -68,7 +68,7 @@ ${escapeBoltTags(file.content)}
   const userMessage: Message = {
     role: 'user',
     id: generateId(),
-    content: `Import the "${folderName}" folder`,
+    content: `Import the "${folderName}" project`,
     createdAt: new Date(),
   };
 
@@ -78,7 +78,7 @@ ${escapeBoltTags(file.content)}
     messages.push({
       role: 'user',
       id: generateId(),
-      content: 'Setup the codebase and Start the application',
+      content: 'Start the application',
     });
     messages.push(commandsMessage);
   }
